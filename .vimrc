@@ -14,7 +14,6 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 "  NeoBundle 'Shougo/neocomplcache.git'
 "  NeoBundle 'Shougo/unite.vim.git'
 
-NeoBundle 'Shougo/neocomplete.vim'  
 NeoBundle 'kannokanno/previm'
 NeoBundle 'tyru/open-browser'
 NeoBundle 'fuenor/qfixhowm'
@@ -27,6 +26,7 @@ NeoBundle 'h1mesuke/vim-alignta'
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Shougo/vimfiler'
 NeoBundle 'Shougo/vimproc'
+NeoBundle 'scrooloose/nerdtree'
 call neobundle#end()
 
 " ファイル形式検出、プラグイン、インデントを ON
@@ -36,7 +36,15 @@ filetype plugin indent on       " restore filetype
 let g:neocomplete#enable_at_startup = 1
 " previm setting
 let g:previm_open_cmd = 'open -a Google\ Chrome'
+"Previm設定
+	augroup PrevimSettings
+		autocmd!
+		autocmd BufNewFile,BufRead *. {md, mdwn, mkd, mkdn, mark*, wiki} set filetype=markdown
+	augroup END
 
+" デフォルトのCSSを使わず、独自のCSSのみ適用する
+let g:previm_disable_default_css = 1
+let g:previm_custom_css_path = '~/pukiwiki.css.php'
 
 "qfixhown setting
 set runtimepath+=~/path/to/qfixapp
@@ -45,11 +53,15 @@ let howm_dir = '~/Dropbox/howm'
 "Html出力先
 let HowmHtml_htmldir = '/Dropbox/howm/html_dir'
 " QfixHowm + Markdown
-let QfixHowm_HowmMode		= 0
-let QfixHowm_Title		= '#'
+
+let howm_fileencoding		= 'utf-8'
+let howm_fileformat		= 'unix'
+let QFixHowm_HowmMode		= 0
+let QFixHowm_Title		= '#'
+"let QFixHowm_Title		= '='
 let suffix			= 'mkd'
-let QfixHowm_UserFileType	= 'markdown'
-let QfixHowm_UserFileExt	= suffix
+let QFixHowm_UserFileType	= 'markdown'
+let QFixHowm_UserFileExt	= suffix
 let howm_filename		= '%Y%m%Y-%m-%d-%H%M%S.' .suffix
 
 "airline setting
@@ -66,14 +78,18 @@ let g:airline_left_sep = '▶'
 let g:airline_right_sep = '◀'
 
 "ファイル形式の検出on/off
-filetype plugin on
+filetype plugin indent on
 
 "拡張子をmarkdownと認識させる
-autocmd BufRead,BufNewFile *.mkd  setfiletype markdown
-autocmd BufRead,BufNewFile *.md  setfiletype markdown
+"autocmd BufRead,BufNewFile *.mkd  setfiletype markdown
+"autocmd BufRead,BufNewFile *.md  setfiletype markdown
 
-autocmd CursorHold *  wall
-autocmd CursorHoldI *  wall
+"autocmd CursorHold *  wall
+"autocmd CursorHoldI *  wall
+
+
+"Qfixhown設定
+
 
 "############
 "標準形

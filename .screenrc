@@ -36,5 +36,11 @@ scrollback 10000
  bind -c operate c eval 'screen' 'command -c operate'
  bind -c operate x eval 'remove' 'command -c operate'
 
+## screenでvim256色を使えるようにする。
+attrcolor b ".I"
+defbce on 
+termcapinfo xterm* 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
+
+
 #layout表示モード
 
