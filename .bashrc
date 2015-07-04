@@ -21,7 +21,7 @@ export LSCOLORS='GxFxDxDxhxDgDxabagacad'
 #Prompt config
 #export PS1="[\u@\h \W]\\$"
 #export PS1="[\u/\t,\w]"
-export PS1="[$HOSTNAME $PWD]
+export PS1="[$HOSTNAME $PWD]"
 alias grep='grep --color'
 
 #.screens設定
