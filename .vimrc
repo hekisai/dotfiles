@@ -60,7 +60,7 @@ let QFixHowm_HowmMode		= 0
 let QFixHowm_Title		= '#'
 "let QFixHowm_Title		= '='
 let suffix			= 'mkd'
-let QFixHowm_UserFileType	= 'markdown'
+Let QFixHowm_UserFileType	= 'markdown'
 let QFixHowm_UserFileExt	= suffix
 let howm_filename		= '%Y%m%Y-%m-%d-%H%M%S.' .suffix
 
@@ -70,7 +70,7 @@ let g:airline_section_a = airline#section#create(['mode','','branch'])
 let g:airline_powerline_fonts = 1
 set guifont=Ricty\ Regular\ for\ Powerline:h14
 let g:Powerline_symbols = 'fancy'
-let g:airline_theme = 'molokai'
+let g:airlinetheme = 'molokai'
 set t_Co=256
 "let g:airline#extensions#tabline#enabled = 1
 
@@ -89,7 +89,6 @@ filetype plugin indent on
 
 
 "Qfixhown設定
-
 
 "############
 "標準形
@@ -113,7 +112,7 @@ set title       "ウィンドウのタイトルを書き換える
 set cursorline  "カーソル行を強調表示
 set hlsearch     "検索結果をハイライト
 set showmode     "現在のモードを表示
-colorscheme elflord 
+colorscheme koehler 
 "set list       "改行コードを表示する
 set hidden "バッファを保存しなくても他のバッファを表示できるようにする
 set wildmenu "コマンド補完を便利に
