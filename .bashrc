@@ -16,8 +16,8 @@ alias vi='vim'
 
 #color
 #export LSCOLORS=gxfxcxdxbxegedabagacad
-export LSCOLORS='GxFxDxDxhxDgDxabagacad'
-
+#export LSCOLORS='GxFxDxDxhxDgDxabagacad'
+export LSCOLORS=gxfxcxdxbxegedabagacad
 #Prompt config
 #export PS1="[\u@\h \W]\\$"
 #export PS1="[\u/\t,\w]"
