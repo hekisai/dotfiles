@@ -27,6 +27,7 @@ NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Shougo/vimfiler'
 NeoBundle 'Shougo/vimproc'
 NeoBundle 'scrooloose/nerdtree'
+NeoBundle 'Drawit'
 call neobundle#end()
 
 " ファイル形式検出、プラグイン、インデントを ON
@@ -60,7 +61,7 @@ let QFixHowm_HowmMode		= 0
 let QFixHowm_Title		= '#'
 "let QFixHowm_Title		= '='
 let suffix			= 'mkd'
-Let QFixHowm_UserFileType	= 'markdown'
+let QFixHowm_UserFileType	= 'markdown'
 let QFixHowm_UserFileExt	= suffix
 let howm_filename		= '%Y%m%Y-%m-%d-%H%M%S.' .suffix
 
@@ -112,7 +113,9 @@ set title       "ウィンドウのタイトルを書き換える
 set cursorline  "カーソル行を強調表示
 set hlsearch     "検索結果をハイライト
 set showmode     "現在のモードを表示
-colorscheme koehler 
+colorscheme molokai 
+highlight Normal ctermbg=none
+set background=dark
 "set list       "改行コードを表示する
 set hidden "バッファを保存しなくても他のバッファを表示できるようにする
 set wildmenu "コマンド補完を便利に
