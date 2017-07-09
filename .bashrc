@@ -1,4 +1,3 @@
-
 PATH=$PATH:$HOME
 
 #alias
@@ -11,8 +10,7 @@ alias cp='cp -i'
 
 alias vi='vim'
 
-#screen 4.1.0
-#alias screen='screen-4.1.0'
+alias airport='/System/Library/PrivateFrameworks/Apple80211.framework/Versions/A/Resources/airport'
 
 #color
 #export LSCOLORS=gxfxcxdxbxegedabagacad
@@ -21,7 +19,8 @@ export LSCOLORS=gxfxcxdxbxegedabagacad
 #Prompt config
 #export PS1="[\u@\h \W]\\$"
 #export PS1="[\u/\t,\w]"
-export PS1="[$HOSTNAME $PWD]"
+export PS1="[\t,\w]$"
+#export PS1="[$HOSTNAME $PWD]"
 alias grep='grep --color'
 
 #.screens設定
@@ -32,3 +31,11 @@ if [ ! -d $SCREENDIR ];then
 fi
 chmod 700 $SCREENDIR
 
+# macでchromeをターミナルから起動する。
+alias chrome="open -a /Applications/Google Chrome.app"
+
+#java設定
+#export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
+export JAVA_HOME=$(/usr/libexec/java_home)
+
+export PLANTUML_JAR="/usr/local/Cellar/plantuml/8053/libexec/plantuml.jar"

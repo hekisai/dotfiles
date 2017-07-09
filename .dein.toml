@@ -1,0 +1,132 @@
+[[plugins]]
+repo = 'kannokanno/previm'
+hook_add = '''
+let g:previm_open_cmd = 'open -a Google\ Chrome'
+
+	augroup PrevimSettings
+		autocmd!
+		autocmd BufNewFile,BufRead *. {md, mdwn, mkd, mkdn, mark*, wiki} set filetype=markdown
+	augroup END
+
+let g:previm_disable_default_css = 1
+let g:previm_custom_css_path = '~/pukiwiki.css.php'
+" リアルタイムにプレビューする
+let g:previm_enable_realtime = 1
+'''
+
+[[plugins]]
+repo = 'tyru/open-browser.vim'
+
+[[plugins]]
+repo = 'fuenor/qfixhowm'
+hook_add = '''
+set runtimepath+=~/path/to/qfixapp
+"Dropboxフォルダに howmフォルダを作るように howm_dir を設定する
+let howm_dir = '~/Dropbox/howm'
+"Html出力先
+let HowmHtml_htmldir = '/Dropbox/howm/html_dir'
+" QfixHowm + Markdown
+"日記ファイルをhowm_dirのDiaryに作成
+"let QFixHowm_DiarYFile = 'diary/%Y/%m/%Y-%m-%d-000000.mkd'
+
+let howm_fileencoding		= 'utf-8'
+let howm_fileformat		= 'unix'
+let QFixHowm_HowmMode		= 0
+let QFixHowm_Title		= '##'
+"let QFixHowm_Title		= '='
+let suffix			= 'mkd'
+let QFixHowm_UserFileType	= 'markdown'
+let QFixHowm_UserFileExt	= suffix
+let howm_filename		= '%Y%m%Y-%m-%d-%H%M%S.' .suffix
+'''
+
+[[plugins]]
+repo = 'vim-scripts/Markdown'
+
+[[plugins]]
+repo = 'vim-scripts/vimwiki'
+
+[[plugins]]
+repo = 'vim-scripts/VOom'
+
+[[plugins]]
+repo = 'h1mesuke/vim-alignta'
+
+[[plugins]]
+repo = 'vim-scripts/Drawit'
+
+[[plugins]]
+repo = 'aklt/plantuml-syntax'
+
+[[plugins]]
+repo = 'Rykka/clickable.vim'
+
+[[plugins]]
+repo = 'itchyny/calendar.vim'
+
+[[plugins]]
+repo = 'scrooloose/syntastic'
+hook_add = '''
+"行番号の左に表示するワーニングシンボルを設定する。
+let g:syntastic_error_symbol = '✗'
+let g:syntastic_warning_symbol = '⚠'
+let g:syntastic_enable_signs=1
+"Qfixにエラーを表示する
+"1:Qfix有 2:Qfix無
+let g:syntastic_auto_loc_list=1
+"pythonのsyntax checkerをpylintに設定する。
+let g:syntastic_python_checkers = ['pylint']
+'''
+
+[[plugins]]
+repo = 'nathanaelkane/vim-indent-guides'
+hook_add = '''
+let g:indent_guides_enable_on_vim_startup=1
+let g:indent_guides_start_level=2
+let g:indent_guides_auto_colors=0
+autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=235
+autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=234
+let g:indent_guides_color_change_percent = 50
+let g:indent_guides_guide_size = 1
+'''
+
+[[plugins]]
+repo = 'bronson/vim-trailing-whitespace'
+
+[[plugins]]
+repo = 'itchyny/lightline.vim'
+hook_add = '''
+  let g:lightline = {
+  \   'colorscheme': 'wombat',
+  \   'mode_map': {'c': 'NORMAL'},
+  \   'active': {
+  \     'left': [
+  \          ['mode', 'paste'],
+  \          ['fugitive', 'gitgutter', 'filename'],
+  \          ],
+  \     'right':[
+  \           ['lineinfo','syntastic'],
+  \           ['percent'],
+  \           ['charcode', 'fileformat', 'fileencoding']
+  \         ]
+  \ },
+  \ 'separator': {'left': '⮀', 'right': '⮂'},
+  \ 'subseparator': {'left': '⮁', 'right': '⮃'}
+  \ }
+  set laststatus=2
+'''
+
+[[plugins]]
+repo = 'thinca/vim-quickrun'
+hook_add = '''
+nmap <Leader>r <plug>(quickrun)
+let g:quickrun_config={'*': {'split': ''}}
+set splitbelow
+'''
+
+[[plugins]]
+repo = 'easymotion/vim-easymotion'
+
+[[plugins]]
+repo = 'kazuph/previm'
+

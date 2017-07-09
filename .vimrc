@@ -1,11 +1,4 @@
 "vi との互換性OFF
-set nocompatible
-filetype off            " for NeoBundle
-
-if has('vim_starting')
-        set rtp+=$HOME/.vim/bundle/neobundle.vim/
-endif
-
 if !&compatible
   set nocompatible
 endif
@@ -15,7 +8,7 @@ augroup MyAutoCmd
   autocmd!
 augroup END
 
-" dein settings {{{
+"Start dein Scripts-------------------------
 " dein自体の自動インストール
 let s:cache_home = empty($XDG_CACHE_HOME) ? expand('~/.vim') : $XDG_CACHE_HOME
 let s:dein_dir = s:cache_home . '/dein'
@@ -42,87 +35,8 @@ endif
 
 "End dein Scripts-------------------------
 
-"{{{--- lightline setting
-set laststatus=2
-"---}}}
-
 " ファイル形式検出、プラグイン、インデントを ON
 filetype plugin indent on       " restore filetype
-
-"#####################################
-"########## Plugin Setting ###########
-"#####################################
-
-"{{{--- neocomplete setting
-let g:neocomplete#enable_at_startup = 1
-"---}}}
-
-"{{{--- previm setting
-let g:previm_open_cmd = 'open -a Google\ Chrome'
-
-	augroup PrevimSettings
-		autocmd!
-		autocmd BufNewFile,BufRead *. {md, mdwn, mkd, mkdn, mark*, wiki} set filetype=markdown
-	augroup END
-
-" デフォルトのCSSを使わず、独自のCSSのみ適用する
-let g:previm_disable_default_css = 1
-let g:previm_custom_css_path = '~/pukiwiki.css.php'
-" リアルタイムにプレビューする
-let g:previm_enable_realtime = 1
-"---}}}
-
-"{{{--- qfixhown setting
-set runtimepath+=~/path/to/qfixapp
-"Dropboxフォルダに howmフォルダを作るように howm_dir を設定する
-let howm_dir = '~/Dropbox/howm'
-"Html出力先
-let HowmHtml_htmldir = '/Dropbox/howm/html_dir'
-" QfixHowm + Markdown
-"日記ファイルをhowm_dirのDiaryに作成
-"let QFixHowm_DiarYFile = 'diary/%Y/%m/%Y-%m-%d-000000.mkd'
-
-let howm_fileencoding		= 'utf-8'
-let howm_fileformat		= 'unix'
-let QFixHowm_HowmMode		= 0
-let QFixHowm_Title		= '##'
-"let QFixHowm_Title		= '='
-let suffix			= 'mkd'
-let QFixHowm_UserFileType	= 'markdown'
-let QFixHowm_UserFileExt	= suffix
-let howm_filename		= '%Y%m%Y-%m-%d-%H%M%S.' .suffix
-"---}}}
-
-"{{{--- syntastic setting
-"行番号の左に表示するワーニングシンボルを設定する。
-let g:syntastic_error_symbol = '✗'
-let g:syntastic_warning_symbol = '⚠'
-
-let g:syntastic_enable_signs=1
-"1:Qfix有 2:Qfix無
-let g:syntastic_auto_loc_list=1
-
-"pythonのsyntax checkerをpylintに設定する。
-let g:syntastic_python_checkers = ['pylint']
-"---}}}
-
-"{{{--- indent-guides setting
-let g:indent_guides_enable_on_vim_startup=1
-let g:indent_guides_start_level=2
-let g:indent_guides_auto_colors=0
-autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=235
-autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=234
-let g:indent_guides_color_change_percent = 50
-let g:indent_guides_guide_size = 1
-"---}}}
-
-
-"{{{--- quickrun setting
-nmap <Leader>r <plug>(quickrun)
-let g:quickrun_config={'*': {'split': ''}}
-set splitbelow
-"---}}}
-"###############################
 
 "ファイル形式の検出on/off
 filetype plugin indent on
@@ -140,11 +54,10 @@ filetype plugin indent on
 
 "############
 "入力関係
-set backspace=indent,eol,start  "BSでなんでも消せるようにする
+set backspace=indent,eol,start "BSでなんでも消せるようにする
 set showmatch "綴じ括弧の入力時に対応する括弧を表示する。
-""閉じ括弧が入力されたとき、対応する括弧を表示する
-set wildmenu    "補完候補を表示する
-set clipboard+=unnamed   "クリップボードをWindowsと連携
+set wildmenu "補完候補を表示する
+set clipboard+=unnamed "クリップボードをWindowsと連携
 set autowrite "自動保存
 set autoindent "新しい行のインデントを現在行と同じにする
 set smartindent
@@ -194,4 +107,3 @@ nnoremap gc :<C-u>!git<Space>
 if exists('$colorcolumn')
   set colorcolumn=+1
 endif
-
