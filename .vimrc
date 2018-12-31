@@ -123,9 +123,6 @@ let g:airline#extensions#tabline#buffer_idx_format = {
 	\}
 
 "タブ移動のショートカット
-"nmap <C-p> <Plug>AirlineSelectPrevTab
-"nmap <C-n> <Plug>AirlineSelectNextTab
-
 nmap gT <Plug>AirlineSelectPrevTab
 nmap gt <Plug>AirlineSelectNextTab
 
