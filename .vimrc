@@ -3,6 +3,8 @@ if !&compatible
   set nocompatible
 endif
 
+filetype on
+
 call plug#begin('~/.vim/plugged')
 Plug 'tpope/vim-fugitive'
 Plug 'vim-airline/vim-airline'
@@ -20,9 +22,14 @@ Plug 'weirongxu/plantuml-previewer.vim'
 Plug 'thinca/vim-quickrun'
 Plug 'w0rp/ale'
 Plug 'Valloric/YouCompleteMe'
-Plug 'lambdalisue/vim-pyenv'
-
+Plug 'davidhalter/jedi-vim'
 call plug#end()
+
+"vim-quickrun setup
+"-------------------------------------------------
+
+
+
 
 
 "ycm setup
@@ -36,6 +43,10 @@ set splitbelow
 
 "ale setup
 "-------------------------------------------------
+"有効にするlinter
+let g:ale_linters = {
+\ 'python': ['pylint'],
+\}
 " 保存時のみ実行する
 let g:ale_lint_on_text_changed = 0
 " 表示に関する設定
@@ -49,6 +60,12 @@ highlight link ALEWarningSign StorageClass
 " Ctrl + kで次の指摘へ、Ctrl + jで前の指摘へ移動
 nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 nmap <silent> <C-j> <Plug>(ale_next_wrap)
+"-------------------------------------------------
+
+"jedi-vim setup
+"-------------------------------------------------
+let g:jedi#force_py_version = 3
+autocmd FileType python setlocal completeopt-=preview
 "-------------------------------------------------
 
 
@@ -85,7 +102,7 @@ let howm_dir = '~/Dropbox/howm'
 let HowmHtml_htmldir = '/Dropbox/howm/html_dir'
 " QfixHowm + Markdown
 "日記ファイルをhowm_dirのDiaryに作成
-"let QFixHowm_DiarYFile = 'diary/%Y/%m/%Y-%m-%d-000000.mkd'
+let QFixHowm_DiaryFile = 'diary/%Y/%m/%Y-%m-%d-000000.mkd'
 
 let howm_fileencoding		= 'utf-8'
 let howm_fileformat		= 'unix'
@@ -123,11 +140,11 @@ let g:airline#extensions#tabline#buffer_idx_format = {
 	\}
 
 "タブ移動のショートカット
+"nmap <C-p> <Plug>AirlineSelectPrevTab
+"nmap <C-n> <Plug>AirlineSelectNextTab
+
 nmap gT <Plug>AirlineSelectPrevTab
 nmap gt <Plug>AirlineSelectNextTab
-
-
-
 
 if !exists('g:airline_symbols')
 	let g:airline_symbols = {}
