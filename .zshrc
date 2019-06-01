@@ -77,16 +77,24 @@ alias tmux='tmux -2'
 # 日本語ファイル名を表示可能にする
 setopt print_eight_bit
 
-#PYENV setup
+#AdoptOpenJDK
+export JAVA_HOME=/usr/jdk-11.0.2+9_openj9-0.12.1
+export PATH="$JAVA_HOME/bin:$PATH"
+
+#pyenv
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
 
-#neovim setup
+#neovim
 export XDG_CONFIG_HOME=~/.config
 
-#nodebrew steup
+#nodebrew
 export PATH=$HOME/.nodebrew/current/bin:$PATH
 
 #golang
 export PATH=$PATH:/usr/local/go/bin
+
+#rbenv
+export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init -)"
