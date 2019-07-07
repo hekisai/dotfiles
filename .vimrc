@@ -6,6 +6,7 @@ endif
 filetype on
 
 call plug#begin('~/.vim/plugged')
+Plug 'tomasr/molokai'
 Plug 'tpope/vim-fugitive'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -23,14 +24,13 @@ Plug 'thinca/vim-quickrun'
 Plug 'w0rp/ale'
 Plug 'Valloric/YouCompleteMe'
 Plug 'davidhalter/jedi-vim'
+Plug 'tpope/vim-surround'
+"Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'mdempsky/gocode', { 'rtp': 'vim', 'do': '~/.vim/plugged/gocode/vim/symlink.sh' }
 call plug#end()
 
 "vim-quickrun setup
 "-------------------------------------------------
-
-
-
-
 
 "ycm setup
 "-------------------------------------------------
@@ -167,7 +167,7 @@ let g:airline_symbols.whitespace = 'Ξ'	"空白の警告(余分な空白など)
 
 	augroup PrevimSettings
 		autocmd!
-		autocmd BufNewFile,BufRead *. {pu, md, mdwn, mkd, mkdn, mark*, wiki} set filetype=markdown
+		autocmd BufNewFile,BufRead *. {pu, md, mdwn, mkd, mkdn, mark*, wiki, adoc} set filetype=markdown
 	augroup END
 let g:previm_disable_default_css = 1
 "let g:previm_custom_css_path = '~/pukiwiki.css.php'
@@ -216,7 +216,7 @@ autocmd InsertLeave * set iminsert=0 imsearch=0  "IME関係
 syntax on       "文字に色を付ける
 set number      "行番号表示
 set ruler       "ルーラー表示(ステータスライン変えてるから意味ない)
-set title       "ウィンドウのタイトルを書き換える
+"set title       "ウィンドウのタイトルを書き換える
 set cursorline  "カーソル行を強調表示
 set hlsearch     "検索結果をハイライト
 set showmode     "現在のモードを表示
