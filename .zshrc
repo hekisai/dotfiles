@@ -1,3 +1,30 @@
+# zplugが無ければgitからclone
+#if [[ ! -d ~/.zplug ]];then
+#  git clone https://github.com/zplug/zplug ~/.zplug
+#fi
+
+# zplugを使う
+#source ~/.zplug/init.zsh
+
+# zplug plugin
+# zplug "ユーザー名/リポジトリ名",タグ
+
+# 自分自身をプラグインとして管理
+#zplug "zplug/zplug", hook-build:'zplug --self-manage'
+#zplug "zsh-users/zsh-completions"
+
+# インストールしていないプラグインはインストール
+#if ! zplug check --verbose; then
+#  printf "Install?[y/N]:"
+#  if read -q; then
+#    echo; zplug install
+#  fi
+#fi
+
+#コマンドをリンクして、PATHに追加し、プラグインは読み込む
+#zplug load -verbose
+
+
 #path
 export PATH=$PATH:$HOME/bin
 
@@ -15,37 +42,65 @@ setopt share_history
 # 同時に起動したzshの間でヒストリを共有する
 setopt share_history
 
-# Set up the prompt
-#補完機能を有効にする
-autoload -Uz promptinit
-promptinit
-if [ -e /usr/local/share/zsh-completions ]; then
-  fpath = (/usr/local/share/zsh-completions $fpath)
-fi
+#配列番号を0からにする(bashの仕様と同じにする)
+setopt ksharrays
 
-fpath=(~/.zsh/completion $fpath)
+# Set up the prompt
+autoload -U compinit
+compinit -u
+#補完機能を有効にする
+#autoload -Uz promptinit
+#promptinit
+#if [ -e /usr/local/share/zsh-completions ]; then
+#  fpath = (/usr/local/share/zsh-completions $fpath)
+#fi
+#
+fpath=(/usr/local/share/zsh-completions ${fpath})
 
 # カラーにする
 autoload colors
-colors
 
 # PROMPT Setting
+# %M    ホスト名
+# %m    ホスト名
+# %d    カレントディレクトリ(フルパス)
+# %~    カレントディレクトリ(フルパス2)
+# %C    カレントディレクトリ(相対パス)
+# %c    カレントディレクトリ(相対パス)
+# %n    ユーザ名
+# %#    ユーザ種別
+# %?    直前のコマンドの戻り値
+# %D    日付(yy-mm-dd)
+# %W    日付(yy/mm/dd)
+# %w    日付(day dd)
+# %*    時間(hh:flag_mm:ss)
+# %T    時間(hh:mm)
+# %t    時間(hh:mm(am/pm))
+
 local p_cdir="%B%F{blue}[%~]%f%b"$'\n'
 local p_info="%n@%m"
 PROMPT=" $p_cdir$p_info > "
 export LSCOLORS=gxfxcxdxbxegedabagacad
-#
 
 #prompt adam1
 setopt histignorealldups sharehistory
 
+#TABで順に補完候補を切り替える
+setopt auto_menu
+
 # Use emacs keybindings even if our EDITOR is set to vi
-bindkey -e
+bindkey -v
 
 # Keep 1000 lines of history within the shell and save it to ~/.zsh_history:
 HISTSIZE=1000
 SAVEHIST=1000
 HISTFILE=~/.zsh_history
+
+# function
+# cdを打ったら自動的にlsを打ってくれるコマンド
+function cd(){
+  builtin cd $@ && ls;
+}
 
 zstyle ':completion:*' auto-description 'specify: %d'
 zstyle ':completion:*' completer _expand _complete _correct _approximate
@@ -73,6 +128,7 @@ alias rm='rm -i'
 alias cp='cp -i'
 alias vi='vim'
 alias tmux='tmux -2'
+alias station='station --no-sandbox'
 
 # 日本語ファイル名を表示可能にする
 setopt print_eight_bit
@@ -86,9 +142,6 @@ export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
 
-#neovim
-export XDG_CONFIG_HOME=~/.config
-
 #nodebrew
 export PATH=$HOME/.nodebrew/current/bin:$PATH
 
@@ -98,3 +151,20 @@ export PATH=$PATH:/usr/local/go/bin
 #rbenv
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
+
+#docker tag search
+function docker-taglist {
+    curl -s https://registry.hub.docker.com/v1/repositories/$1/tags | sed "s/,/\n/g" | grep name | cut -d '"' -f 4
+}
+
+#fzf install
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+#fzf setting
+#ripggripを利用、隠しファイルも対象、.git配下を無視、igtignoreに定義済みの対象を無視、シンボリックリンクを追う
+export FZF_DEFAULT_COMMAND='rg --files --hidden --glob "!.git"'
+export FZF_CTRL_T_COMMAND='rg --files --hidden --glob "!.git"'
+export FZF_DEFAULT_OPTS='--height 40% --reverse --border --inline-info'
+export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -200'"
+
+
