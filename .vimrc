@@ -27,10 +27,15 @@ Plug 'davidhalter/jedi-vim'
 Plug 'tpope/vim-surround'
 "Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'mdempsky/gocode', { 'rtp': 'vim', 'do': '~/.vim/plugged/gocode/vim/symlink.sh' }
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+
 call plug#end()
 
-"vim-quickrun setup
-"-------------------------------------------------
+"python3を使う
+if has('python3')
+endif
+
 
 "ycm setup
 "-------------------------------------------------
@@ -68,7 +73,6 @@ let g:jedi#force_py_version = 3
 autocmd FileType python setlocal completeopt-=preview
 "-------------------------------------------------
 
-
 "NERDTree setup
 "-------------------------------------------------
 nnoremap <silent><c-e> :NERDTreeToggle<CR> "Ctrl+eでNERDTreeを起動する
@@ -92,7 +96,6 @@ let g:indent_guides_guide_size = 1
 '
 let g:vimwiki_list = [{'path':'~/Dropbox/vimwiki/'}, {'gohome':'tabe'}]
 
-
 "Howmコマンドキーマップ
 let QFixHowm_Key = 'g'
 set runtimepath+=~/path/to/qfixapp
@@ -115,6 +118,8 @@ let QFixHowm_UserFileExt	= suffix
 let howm_filename		= '%Y%m%Y-%m-%d-%H%M%S.' .suffix
 
 set laststatus=2
+set statusline=%-(%f%m%h%q%r%w%)%=%{&ff}\|%{&fenc}\ %y%l,%c\ %0P
+
 set showtabline=2
 set t_Co=256
 let g:airline_theme = 'papercolor'
@@ -258,4 +263,46 @@ nnoremap gc :<C-u>!git<Space>
 if exists('$colorcolumn')
   set colorcolumn=+1
 endif
+
+"fzf setting
+" This is the default extra key bindings
+let g:fzf_action = {
+  \ 'ctrl-t': 'tab split',
+  \ 'ctrl-x': 'split',
+  \ 'ctrl-v': 'vsplit' }
+
+" Default fzf layout
+" - down / up / left / right
+let g:fzf_layout = { 'down': '~40%' }
+
+" In Neovim, you can set up fzf window using a Vim command
+let g:fzf_layout = { 'window': 'enew' }
+let g:fzf_layout = { 'window': '-tabnew' }
+let g:fzf_layout = { 'window': '10new' }
+
+" Customize fzf colors to match your color scheme
+let g:fzf_colors =
+\ { 'fg':      ['fg', 'Normal'],
+  \ 'bg':      ['bg', 'Normal'],
+  \ 'hl':      ['fg', 'Comment'],
+  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+  \ 'hl+':     ['fg', 'Statement'],
+  \ 'info':    ['fg', 'PreProc'],
+  \ 'border':  ['fg', 'Ignore'],
+  \ 'prompt':  ['fg', 'Conditional'],
+  \ 'pointer': ['fg', 'Exception'],
+  \ 'marker':  ['fg', 'Keyword'],
+  \ 'spinner': ['fg', 'Label'],
+  \ 'header':  ['fg', 'Comment'] }
+
+" Enable per-command history.
+" CTRL-N and CTRL-P will be automatically bound to next-history and
+" previous-history instead of down and up. If you don't like the change,
+" explicitly bind the keys to down and up in your $FZF_DEFAULT_OPTS.
+let g:fzf_history_dir = '~/.local/share/fzf-history'
+
+"command-line completion(補完候補の表示)
+set wildmenu
+set wildmode=list:longest
 
