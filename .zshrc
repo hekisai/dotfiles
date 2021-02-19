@@ -24,8 +24,7 @@
 #コマンドをリンクして、PATHに追加し、プラグインは読み込む
 #zplug load -verbose
 
-
-#path
+#PATH
 export PATH=$PATH:$HOME/bin
 
 export LANG=ja_JP.UTF-8
@@ -47,7 +46,7 @@ setopt ksharrays
 
 # Set up the prompt
 autoload -U compinit
-compinit -u
+#compinit -u
 #補完機能を有効にする
 #autoload -Uz promptinit
 #promptinit
@@ -142,6 +141,9 @@ export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
 
+#Poetry
+source $HOME/.poetry/env
+
 #nodebrew
 export PATH=$HOME/.nodebrew/current/bin:$PATH
 
@@ -167,4 +169,10 @@ export FZF_CTRL_T_COMMAND='rg --files --hidden --glob "!.git"'
 export FZF_DEFAULT_OPTS='--height 40% --reverse --border --inline-info'
 export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -200'"
 
-
+# fd - cd to selected directory
+fd() {
+  local dir
+  dir=$(find ${1:-.} -path '*/\.*' -prune \
+                  -o -type d -print 2> /dev/null | fzf +m) &&
+  cd "$dir"
+}
