@@ -1,0 +1,48 @@
+
+[cursor]
+style = { shape = "Block", blinking= "On" }
+blink_interval = 500
+
+[scrolling]
+history = 10000
+#1スクロールで進む行数
+multiplier = 3
+
+[general]
+#設定ファイル変更時にオートリロード
+live_config_reload = true
+import = [
+ "~/.config/alacritty/themes/themes/tokyo_night.toml"
+ ]
+
+
+[window]
+#ウインドウの不透明度(0.0で完全に透明、1.0で不透明)
+opacity = 0.95
+
+padding.x = 10
+padding.y = 10
+
+dimensions = { columns = 100, lines = 60  }
+
+
+[font]
+#文字サイズ
+size = 10.0
+[font.normal]
+family = "PlemolJP Console"
+style = "Regular"
+
+
+[[mouse.bindings]]
+mouse = "Right"
+action = "Paste"
+
+[selection]
+save_to_clipboard = true
+
+[[keyboard.bindings]]
+key = "N"
+mods = "Control|Shift"
+action = "CreateNewWindow"
+
